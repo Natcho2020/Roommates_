@@ -3,10 +3,15 @@ import fs from "node:fs/promises"
 import path from "node:path";
 import axios from "axios";
 
+const usersFile = path.join(import.meta.dirname, "../data/usuarios.json")
 
-const dataRoommates = path.join(import.meta.dirname, "../roommates.json")
+export const getRoommates = async () => {
+    const data = await fs.readFile(usersFile, "utf-8")
+    const rommates = JSON.parse(data)
+    return rommates
+}
 
-const crearRoommate = async () => {
+export const createRoommate = async () => {
     const data = await axios.get("https://randomuser.me/api")
     const user = data.data.results[0]
     const roommate = {
@@ -17,7 +22,7 @@ const crearRoommate = async () => {
         recibe: 0
     }
 
-    fs.readFile(dataRoommates, "utf-8")
+    fs.readFile(usersFile, "utf-8")
         .then(data => {
             const rommatesJSON = JSON.parse(data)
             rommatesJSON.roommates.push(roommate)
@@ -25,12 +30,11 @@ const crearRoommate = async () => {
             return rommatesJSON
         })
         .then(rommates => {
-            fs.writeFile(dataRoommates, JSON.stringify(rommates))
+            fs.writeFile(usersFile, JSON.stringify(rommates))
         })
         .catch(error => {
-            throw new Error('Error al crear Usuario')
+            throw new Error('Cant create user')
         })
-    console.log(roommate)
+
     return roommate
 }
-export { crearRoommate }

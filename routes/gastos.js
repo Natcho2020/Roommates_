@@ -1,20 +1,76 @@
 import { Router } from "express";
 import path from "node:path"
+import { v4 as uuidv4 } from "uuid";
+import fs from "node:fs/promises"
+import { getGastos, crearGasto, deleteGasto, updateGasto } from "../models/gastos.js"
 
 const router = Router()
 
-router.get("/gasto", (req, res) => {
-
+router.get("/gastos", async (req, res) => {
+    try {
+        const gastos = await getGastos()
+        res.json(gastos)
+    } catch {
+        res.status(500).json({
+            status: 500,
+            message: 'Error interno de servidor'
+        })
+    }
 })
 
-router.post("/gasto", (req, res) => {
+router.post("/gasto", async (req, res) => {
+    const payload = req.body
+    console.log(payload)
+    try {
+        const gasto = await crearGasto(payload)
+        res.send(gasto)
 
-})
-router.put("/gasto", (req, res) => {
+    } catch (error) {
+        // respondemos con error interno
+        res.status(500).json({
+            message: "Error interno de servidor",
+            status: 500
+        })
+    }
+}
+)
+router.delete("/gasto", async (req, res) => {
+    const id = req.query.id
+    try {
+        await deleteGasto(id)
+    } catch (error) {
+        // respondemos con error interno
+        res.status(500).json({
+            message: "Error interno de servidor",
+            status: 500
+        })
+    }
+}
+)
 
-})
-router.delete("/gasto", (req, res) => {
+router.put("/gastos", async (req, res) => {
+    // Obtenemos id del queryString y payload
+    const id = req.query.id
+    const payload = req.body
+    const traeValores = !Object.values(payload).some(value => value == '')
+    console.log(id)
+    if (traeValores) {
 
-})
+        try {
+
+            await updateGasto(id, payload)
+            res.status(200).json({
+                message: 'Gasto Modificado'
+            })
+        } catch (error) {
+            res.status(500).json({
+                status: 500,
+                message: 'Error interno de servidor'
+            })
+        }
+    }
+}
+)
+
 
 export { router }

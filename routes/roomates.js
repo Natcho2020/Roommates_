@@ -1,28 +1,33 @@
-
 import { Router } from 'express'
-import { crearRoommate } from "../models/roommates.js"
-import fs from 'node:fs/promises'
 import path from 'node:path'
+import { error } from 'node:console'
+import { createRoommate, getRoommates } from '../models/roommates.js'
 
-router.get("/roomates", (req, res) => {
-})
-router.post("/roomates", (req, res) => {
+const router = Router()
+
+router.get("/roommates", async (req, res) => {
     try {
-        const filePath = path.join(import.meta.dirname, "../roommates.json")
-        fs.readFile(filePath, "utf-8")
-            .then(data => {
-                const roommatesJson = JSON.parse(roommate)
-                roommatesJson.roommates.push(userData)
-                return roommatesJson
-            })
-            .then(data => {
-                fs.writeFile(filePath, JSON.stringify(data))
-            })
-        res.json(userData)
+        const rommates = await getRoommates()
+
+        res.json(rommates)
     } catch (error) {
-        res.status(500).json({ error })
+        console.error(error)
+        res.send(error)
     }
 })
+
+router.post("/roommate", async (req, res) => {
+    try {
+        const roommate = await createRoommate()
+        console.log(roommate)
+        res.send(roommate)
+    } catch (error) {
+        error
+    }
+})
+
+
+
 
 export { router }
 
@@ -30,4 +35,4 @@ export { router }
 
 
 
-const router = Router()
+
