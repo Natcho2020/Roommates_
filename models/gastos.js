@@ -44,10 +44,16 @@ export const deleteGasto = async (id) => {
         console.log(id)
         const data = await fs.readFile(expensesFile, "utf-8")
         const expensesData = JSON.parse(data)
+
+        //Aca se hizo una modificación con el ejercicio resuelto en clase ,
+        //para no re actualizar toda la data ya que elemiminaba el archivo anterior 
+        //Con la funcion findIndex busco el indice o la posicion del elemento a eliminar segun su id 
         const indice = expensesData.gastos.findIndex(gasto => (gasto.id === id))
         if (indice >= 0) {
             console.log(indice)
+            //Luego genero un splice para modificar la data eliminandola sin generar un nuevo arreglo
             expensesData.gastos.splice(indice, 1);
+            //Luego se reescribe el archivo 
             await fs.writeFile(expensesFile, JSON.stringify(expensesData))
         } else {
             return
@@ -64,6 +70,9 @@ export const updateGasto = async (id, payload) => {
         const indice = expensesData.gastos.findIndex(gasto => (gasto.id === id))
         if (indice >= 0) {
             console.log(indice)
+
+            //Lo mismo que con delete pero ahora en vez de solo eliminar , reemplazo el objeto anterior con uno nuevo
+            //traido del payload
             expensesData.gastos.splice(indice, 1, payload);
             await fs.writeFile(expensesFile, JSON.stringify(expensesData))
         } else {

@@ -108,6 +108,7 @@ Articulos de limpieza</textarea>
     crossorigin="anonymous"></script>
 
   <script>
+
     let roommates = [];
     let gastos = [];
     let gastoEditing = null;
@@ -141,7 +142,7 @@ Articulos de limpieza</textarea>
                     <td>${r.nombre}</td>
                     <td class="text-danger">${r.debe ? r.debe : "-"}</td>
                     <td class="text-success">${r.recibe ? r.recibe : "-"}</td>
-                  </tr>
+                    </tr>
               `);
         });
         $("#gastosHistorial").html("");
@@ -224,6 +225,7 @@ Articulos de limpieza</textarea>
     };
 
     imprimir();
+
   </script>
 
   <style>

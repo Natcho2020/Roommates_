@@ -7,8 +7,8 @@ const router = Router()
 
 router.get("/roommates", async (req, res) => {
     try {
-        const rommates = await getRoommates()
 
+        const rommates = await getRoommates()
         res.json(rommates)
     } catch (error) {
         console.error(error)
@@ -18,6 +18,7 @@ router.get("/roommates", async (req, res) => {
 
 router.post("/roommate", async (req, res) => {
     try {
+
         const roommate = await createRoommate()
         console.log(roommate)
         res.send(roommate)

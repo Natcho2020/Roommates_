@@ -3,13 +3,17 @@ import path from "node:path"
 import { v4 as uuidv4 } from "uuid";
 import fs from "node:fs/promises"
 import { getGastos, crearGasto, deleteGasto, updateGasto } from "../models/gastos.js"
+import { recalcularDeudas } from "../models/roommates.js"
+
 
 const router = Router()
 
 router.get("/gastos", async (req, res) => {
     try {
+
         const gastos = await getGastos()
         res.json(gastos)
+
     } catch {
         res.status(500).json({
             status: 500,
@@ -23,6 +27,7 @@ router.post("/gasto", async (req, res) => {
     console.log(payload)
     try {
         const gasto = await crearGasto(payload)
+        recalcularDeudas();
         res.send(gasto)
 
     } catch (error) {
@@ -35,6 +40,7 @@ router.post("/gasto", async (req, res) => {
 }
 )
 router.delete("/gasto", async (req, res) => {
+
     const id = req.query.id
     try {
         await deleteGasto(id)
@@ -49,15 +55,16 @@ router.delete("/gasto", async (req, res) => {
 )
 
 router.put("/gastos", async (req, res) => {
-    // Obtenemos id del queryString y payload
+    // Obtenemos id del queryString y payload del body
     const id = req.query.id
     const payload = req.body
+    //Verificamos que los querys contengan información , ya que se cae por el html 
     const traeValores = !Object.values(payload).some(value => value == '')
     console.log(id)
     if (traeValores) {
 
         try {
-
+            //Funcion de actualizar situada en los models 
             await updateGasto(id, payload)
             res.status(200).json({
                 message: 'Gasto Modificado'

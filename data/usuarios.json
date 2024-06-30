@@ -1,25 +1,3 @@
 {
-    "roommates": [
-        {
-            "id": "a324a4c2-5bb9-468a-ab4a-02ee9bee964e",
-            "nombre": "Carol Vasquez",
-            "email": "carol.vasquez@example.com",
-            "debe": 0,
-            "recibe": 0
-        },
-        {
-            "id": "889ac3fd-47b6-4604-b7a1-af7c4c0919dc",
-            "nombre": "Lidia Rodríguez",
-            "email": "lidia.rodriguez@example.com",
-            "debe": 0,
-            "recibe": 0
-        },
-        {
-            "id": "5f82da0b-652a-49c1-ae42-c71924d56e6b",
-            "nombre": "Victor Hansen",
-            "email": "victor.hansen@example.com",
-            "debe": 0,
-            "recibe": 0
-        }
-    ]
+    "roommates": []
 }

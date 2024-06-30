@@ -8,11 +8,12 @@ import { router as home } from './routes/index.js'
 
 
 const app = express()
+
 app.use(express.json())
 app.use(cors())
 app.use(morgan("dev"))
 
-//Importamps rutas
+//Importamos rutas
 app.use('/', roomates)
 app.use('/', home)
 app.use('/', gastos)
