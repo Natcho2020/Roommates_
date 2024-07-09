@@ -15,8 +15,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "predeploy": "node index.js",
-    "deploy": "gh-pages index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon index.js"
   },
