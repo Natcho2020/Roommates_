@@ -4,15 +4,19 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "file-system": "^2.2.2",
+    "gh-pages": "^6.1.1",
     "morgan": "^1.10.0",
     "uuid": "^10.0.0"
   },
   "name": "prueba---roommates",
   "version": "1.0.0",
+  "homepage": "http://Natcho2020.github.io/Roommates_",
   "description": "Prueba_Roommates_IMR",
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "predeploy": "node index.js",
+    "deploy": "gh-pages index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon index.js"
   },
