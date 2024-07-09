@@ -1,3 +1,1 @@
-{
-    "roommates": []
-}
+{"roommates":[{"id":"25dc6905-e024-41c9-a3e9-ba44f18fe1a6","nombre":"Isaac Cedillo","email":"isaac.cedillo@example.com","debe":-5000,"recibe":20000,"total":25000},{"id":"2b147ff5-44d3-41b3-8595-627d112970b9","nombre":"Sophie Watkins","email":"sophie.watkins@example.com","debe":-10000,"recibe":10000,"total":20000},{"id":"7386e8c2-7607-48ff-b35c-771cbb899940","nombre":"Myrtle Pearson","email":"myrtle.pearson@example.com","debe":-15000,"recibe":0,"total":15000}]}
